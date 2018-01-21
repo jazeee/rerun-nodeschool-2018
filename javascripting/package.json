@@ -9,7 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "javascripting": "^2.6.1",
+    "i18n-core": "^3.2.0",
+    "mustache": "^2.3.0",
     "workshopper-adventure": "^6.0.3"
   }
 }
