@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "javascripting": "^2.6.1"
+    "javascripting": "^2.6.1",
+    "workshopper-adventure": "^6.0.3"
   }
 }
