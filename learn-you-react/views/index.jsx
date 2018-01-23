@@ -33,7 +33,7 @@ class TodoList extends React.Component {
 	render() {
 		return (
 			<div className="todoList">
-				<table style={{border: "2px solid black"}}>
+				<table style={style.table}>
 					<tbody>
 						{this.state.todos.map(({title, details, checked}, index) => {
 							return (
@@ -59,13 +59,13 @@ class TodoList extends React.Component {
 const Todo = (props) => {
 	return (
 		<tr>
-			<td style={{border: "1px solid black"}}>
+			<td style={style.tableContent}>
 				<input type="checkbox" checked={props.checked} onChange={props.handleChange.bind(this)}/>
 			</td>
-			<td style={{border:"1px solid black"}}>
+			<td style={style.tableContent}>
 				{props.title}
 			</td>
-			<td style={{border:"1px solid black"}}>
+			<td style={style.tableContent}>
 				{props.children}
 			</td>
 		</tr>
@@ -84,3 +84,11 @@ class TodoForm extends React.Component {
 		);
 	}
 }
+let style = {
+	table: {
+		border: "2px solid black",
+	},
+	tableContent: {
+		border: "1px solid black",
+	},
+};
