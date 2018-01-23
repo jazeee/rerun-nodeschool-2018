@@ -5,7 +5,7 @@ export default class TodoBox extends React.Component {
 		return (
 			<div className="todoBox">
 				<h1>Todos</h1>
-				<TodoList />
+				<TodoList data={this.props.data}/>
 				<TodoForm />
 			</div>
 		)
@@ -19,23 +19,24 @@ class TodoList extends React.Component {
 			todos: [
 				{
 					title: "Shopping",
-					details: "Milk",
+					detail: "Milk",
 				}, {
 					title: "Hair cut",
-					details: "13:00",
+					detail: "13:00",
 				}, {
 					title: "Learn React",
-					details: "15:00",
+					detail: "15:00",
 				}
 			]
 		}
 	}
 	render() {
+		const {data = []} = this.props;
 		return (
 			<div className="todoList">
 				<table style={style.table}>
 					<tbody>
-						{this.state.todos.map(({title, details, checked}, index) => {
+						{data.map(({title, detail, checked}, index) => {
 							return (
 								<Todo
 									key={index}
@@ -45,7 +46,7 @@ class TodoList extends React.Component {
 										this.setState({checked: !checked});
 									}}
 								>
-									{details}
+									{detail}
 								</Todo>
 							)
 						})}
