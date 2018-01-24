@@ -31,36 +31,36 @@ const data = [
 	}
 ];
 
-  app.use('/bundle.js', function (req, res) {
-      res.setHeader('content-type', 'application/javascript');
+app.use('/bundle.js', function (req, res) {
+	res.setHeader('content-type', 'application/javascript');
 
-      browserify({ debug: true })
-          .transform(babelify.configure({
-              presets: ["react", "es2015"],
-              compact: false
-          }))
-          .require("./app.js", { entry: true })
-          .bundle()
-          .pipe(res);
-  });
+	browserify({ debug: true })
+	.transform(babelify.configure({
+		presets: ["react", "es2015"],
+		compact: false
+	}))
+	.require("./app.js", { entry: true })
+	.bundle()
+	.pipe(res);
+});
 
-    app.use('/', function (req, res) {
-        var initialData = JSON.stringify(data);
-        var markup = ReactDOMServer.renderToString(React.createElement(TodoBox, {data: data}));
+app.use('/', function (req, res) {
+	var initialData = JSON.stringify(data);
+	var markup = ReactDOMServer.renderToString(React.createElement(TodoBox, {data: data}));
 
-        res.setHeader('Content-Type', 'text/html');
+	res.setHeader('Content-Type', 'text/html');
 
-        var html = ReactDOMServer.renderToStaticMarkup(body(null,
-            div({id: 'app', dangerouslySetInnerHTML: {__html: markup}}),
-            script({
-                id: 'initial-data',
-                type: 'text/plain',
-                'data-json': initialData
-            }),
-            script({src: '/bundle.js'})
-        ));
+	var html = ReactDOMServer.renderToStaticMarkup(body(null,
+		div({id: 'app', dangerouslySetInnerHTML: {__html: markup}}),
+		script({
+			id: 'initial-data',
+			type: 'text/plain',
+			'data-json': initialData
+		}),
+		script({src: '/bundle.js'})
+	));
 
-        res.end(html);
-    });
+	res.end(html);
+});
 
 app.listen(app.get('port'), function() {});
